@@ -1,7 +1,7 @@
 import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
-import { TouchableOpacity } from "react-native";
+import { Linking, TouchableOpacity } from "react-native";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
 const Layout = () => {
@@ -23,7 +23,7 @@ const Layout = () => {
             placeholder: "Search",
           },
           headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("tel://24010447")}>
               <Ionicons
                 name="call-outline"
                 color={currentColors.primary}

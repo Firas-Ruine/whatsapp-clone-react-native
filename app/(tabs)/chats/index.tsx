@@ -41,6 +41,11 @@ const Page: React.FC = () => {
   useEffect(() => {
     const chatsRef = ref(database, 'chats');
   
+    /**
+     * This function fetches the chats from the database
+     * 
+     * @returns {() => void} The unsubscribe function
+     */
     const unsubscribe = onValue(chatsRef, (snapshot: DataSnapshot) => {
       const contactsMap: { [key: string]: Chat } = {};
   

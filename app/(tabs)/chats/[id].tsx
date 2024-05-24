@@ -43,6 +43,11 @@ const ChatScreen = () => {
 
   const contactsRef = ref(database, `users`);
 
+  /**
+   * This function fetches the user name from the database
+   * 
+   * @returns {() => void} The unsubscribe function
+   */
   useEffect(() => {
     const unsubscribe = onValue(contactsRef, (snapshot: DataSnapshot) => {
       snapshot.forEach((childSnapshot) => {
@@ -57,6 +62,11 @@ const ChatScreen = () => {
     return () => unsubscribe();
   }, []);
 
+  /**
+   * This function fetches the messages from the database
+   * 
+   * @returns {() => void} The unsubscribe function
+   */
   useEffect(() => {
     const messagesRef = ref(database, `chats/${id}/messages`);
 
@@ -80,6 +90,13 @@ const ChatScreen = () => {
     return () => unsubscribe();
   }, [id]);
 
+  /**
+   * This function sends a message to the database
+   * 
+   * @param {IMessage[]} messages - The messages to send
+   * 
+   * @returns {void} The result of this function
+   */
   const onSend = useCallback(
     async (messages: IMessage[] = []) => {
       const newMessage = messages[0];
@@ -99,6 +116,12 @@ const ChatScreen = () => {
     [id]
   );
 
+  /**
+   * This function renders the input toolbar
+   * 
+   * @param props - The props to render
+   * @returns 
+   */
   const renderInputToolbar = (props: any) => (
     <InputToolbar
       {...props}
@@ -118,6 +141,13 @@ const ChatScreen = () => {
     />
   );
 
+  /**
+   * This function updates the row reference
+   * 
+   * @param ref - The reference to update
+   * 
+   * @returns {void} The result of this function
+   */
   const updateRowRef = useCallback(
     (ref: any) => {
       if (
@@ -131,6 +161,11 @@ const ChatScreen = () => {
     [replyMessage]
   );
 
+  /**
+   * This function closes the swipeable row
+   * 
+   * @returns {void} The result of this function
+   */
   useEffect(() => {
     if (replyMessage && swipeableRowRef.current) {
       swipeableRowRef.current.close();
